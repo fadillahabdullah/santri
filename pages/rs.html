@@ -1,0 +1,54 @@
+<template>
+<div class="page">
+    <div class="navbar no-shadow">
+        <div class="navbar-inner sliding">
+            <div class="title">Rumah Sakit di Surabaya</div>
+            <div class="right">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">close</i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <div id="blokrs" style="margin-bottom: 25px;"></div>
+    </div>
+</div>
+</template>
+
+<script>
+    return{
+        on: {
+            pageInit: function(){
+
+            },
+            pageAfterIn: function (event, page) {
+                $("#blokrs").html('');
+                var jmlrs = 0;
+                app.dialog.preloader('Data Rumah Sakit ...');
+                $.getJSON(get_rs, function(result){
+                    $.each(result, function(i, kolom){
+                        jmlrs++;
+                        if(jmlrs % 2 == 0){ccc = '#b3e5fc';}else{ccc = 'white';}
+                        $("#blokrs").append('\
+                        <div class="card demo-card-header-pic" style="background-color:'+ ccc +';">\
+                            <div style="background-image:url('+ pathgbr + kolom.Foto +')" class="card-header"></div>\
+                            <div class="card-content card-content-padding">\
+                                <p style="color: maroon; font-size: 18px; margin-bottom: -5px;">' + kolom.Nama + '</p>\
+                                <p class="date">\
+                                    <span class="badge color-red">' + kolom.Kategori + '</span> \
+                                </p>\
+                                <p style="text-align: justify;">' + kolom.Deskripsi + ' \
+                                    <a href="https://www.google.com/maps?q=loc:'+ kolom.Lintang +','+ kolom.Bujur +'" class="link color-red external">Lihat Peta</a>\
+                                </p>\
+                            </div>\
+                        </div>');
+                    });
+                    app.dialog.close();
+                });
+            },
+        }
+       
+    }
+</script>

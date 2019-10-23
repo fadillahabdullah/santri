@@ -1,0 +1,196 @@
+<template>
+<div class="page">
+    <div class="navbar no-shadow">
+        <div class="navbar-inner sliding">
+            <div class="title">Form Lapor</div>
+            <div class="right">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">close</i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="page-content">
+          <div class="row" style="margin-top: 20px; margin-left: 10px; margin-right: 10px;">
+                <a href="#" class="col text-align-center color-blue popover-open" data-popover=".popover-profil">
+                    <img src="img/plus.png" class="besar-icon">
+                </a>
+                <a href="#" class="col text-align-center color-blue popover-open" data-popover=".popover-profil">
+                    <img src="img/plus.png" class="besar-icon">
+                </a>
+                <a href="#" class="col text-align-center color-blue popover-open" data-popover=".popover-profil">
+                    <img src="img/plus.png" class="besar-icon">
+                </a>
+                <a href="#" class="col text-align-center color-blue popover-open" data-popover=".popover-profil">
+                    <img src="img/plus.png" class="besar-icon">
+                </a>
+          </div>
+
+          <form class="list" style="margin-top: 5px;">
+              <div class="item-content item-input">
+                  <div class="col-15">
+                      <div class="item-media">
+                          <i class="icon material-icons">work</i>
+                      </div>
+                  </div>
+                  <div class="item-inner">
+                      <div class="item-title item-label">Pilih Jenis Barang</div>
+                      <div class="item-input-wrap">
+                          <input type="text" placeholder="Jenis Barang" readonly>
+                          <span class="input-clear-button"></span>
+                      </div>
+                  </div>
+                  <div class="col-10">
+                      <div class="item-inner">
+                          <div class="item-title item-label">&nbsp</div>
+                          <div class="item-input-wrap">
+                              <button type="button" class="button button-fill color-green" @click="tampiljenisbarang">
+                                  ....
+                              </button>
+                          </div>
+                      </div>
+                  </div> 
+              </div>
+              <div class="item-content item-input">
+                  <div class="col-15">
+                      <div class="item-media">
+                          <i class="icon material-icons">local_grocery_store</i>
+                      </div>
+                  </div>
+                  <div class="item-inner">
+                      <div class="item-title item-label">Nama Barang</div>
+                      <div class="item-input-wrap">
+                          <input type="text" placeholder="Nama Barang">
+                          <span class="input-clear-button"></span>
+                      </div>
+                  </div> <!-- INPUT  --> 
+              </div>
+
+              <div class="item-content item-input">
+                  <div class="col-15">
+                      <div class="item-media">
+                          <i class="icon material-icons">place</i>
+                      </div>
+                  </div>
+                  <div class="item-inner">
+                      <div class="item-title item-label">Pilih Lokasi</div>
+                      <div class="item-input-wrap">
+                          <input type="text" id="txtinstansi" placeholder="Lokasi" readonly>
+                          <span class="input-clear-button"></span>
+                      </div>
+                  </div>
+                  <div class="col-10">
+                      <div class="item-inner">
+                          <div class="item-title item-label">&nbsp</div>
+                          <div class="item-input-wrap">
+                              <button type="button" class="button button-fill color-green" @click="tampilfakultas">
+                                  ....
+                              </button>
+                          </div>
+                      </div>
+                  </div> 
+              </div>
+
+              <ul>
+                <li class="item-content item-input">
+                <div class="item-inner">
+                  <div class="item-title item-label">Deskripsi</div>
+                  <div class="item-input-wrap">
+                    <textarea placeholder=""></textarea>
+                  </div>
+                </div>
+              </li>
+              </ul>
+          </form>
+
+          <p style="text-align: center;">
+            Dengan Menekan Tombol (kirim) Anda Meyakini Laporan Ini Benar
+          </p>
+
+          
+          <p class="row"style="margin-top: 20px; margin-left: 25px; margin-right: 25px;">
+              <button class="col button button-raised button-fill button-round">KIRIM</button>
+          </p>
+        
+
+         <div class="popover popover-profil">
+            <div class="popover-inner">
+                <div class="list">
+                    <ul>
+                        <li><a href="#" class="list-button itemlink- popover-close" onclick="kameraprofil()">Kamera</a></li>
+                        <li><a href="#" class="list-button item-link popover-close" onclick="galeriprofil()">Galeri</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup popup-fakultas">
+            <div class="page">
+                <div class="navbar no-shadow">
+                    <div class="navbar-inner">
+                        <div class="title">Pilih Fakultas</div>
+                        <div class="right">
+                            <a href="#" class="link popup-close"><i class="icon f7-icons">close</i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="list links-list" id="blokfakultas"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup popup-barang">
+            <div class="page">
+                <div class="navbar no-shadow">
+                    <div class="navbar-inner">
+                        <div class="title">Pilih Barang</div>
+                        <div class="right">
+                            <a href="#" class="link popup-close"><i class="icon f7-icons">close</i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="list links-list" id="blokljenisbarang"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</template>
+
+<script>
+  return{
+      methods: {
+          tampilfakultas: function(){
+              var hasil = "<ul>";
+              app.dialog.preloader('Data Fakultas ...');
+              $.getJSON(get_lokasi, function(result){
+                  $.each(result, function(i, kolom){
+                      hasil = hasil + '<li><a href="#" \
+                          onclick="reg_set_lokasi(\''+ kolom.Kode + '|' + kolom.Nama +'\')">'+ kolom.Kode + ' . ' + kolom.Nama +'</a></li>';
+                  });
+                  $("#blokfakultas").html(hasil + '</ul>');
+                  app.dialog.close();
+                  app.popup.open('.popup-fakultas');
+              });
+          },
+          tampiljenisbarang: function(){
+              var hasil = "<ul>";
+              app.dialog.preloader('Data Jenis Barang ...');
+              $.getJSON(get_barang, function(result){
+                  $.each(result, function(i, kolom){
+                      hasil = hasil + '<li><a href="#" \
+                          onclick="reg_set_barang(\''+ kolom.ID + '|' + kolom.Nama +'\')">'+ kolom.ID + ' . ' + kolom.Nama +'</a></li>';
+                  });
+                  $("#blokljenisbarang").html(hasil + '</ul>');
+                  app.dialog.close();
+                  app.popup.open('.popup-barang');
+              });
+          },
+      }
+  }
+</script>

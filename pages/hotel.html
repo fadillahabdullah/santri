@@ -1,0 +1,79 @@
+<template>
+<div class="page">
+    <div class="navbar no-shadow">
+        <div class="navbar-inner sliding">
+            <div class="title">Official Hotel</div>
+            <div class="right">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">close</i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <div class="block">
+            <p style="text-align: center">
+                <img src="img/star.png" style="width:40%; margin-left:auto; margin-right:auto; margin-bottom:3%; display:block">
+            </p>
+            <p style="text-align: justify;">
+                Kami mengutamakan kenyamanan anda selama mengikuti peringatan HPN 2019, terdapat beberapa Official Hotel yang bekerjasama dengan Pemprov Jawa Timur yang akan memberikan pelayanan seperti anda tinggal dirumah sendiri.
+            </p>
+        </div>
+        <div class="list media-list chevron-center" id="blokhotel" style="margin-top: -20px"></div>
+    </div>
+
+    <div class="popover popover-hotel">
+        <div class="popover-inner">
+            <div class="list" id="blokopsihotel"></div>
+        </div>
+    </div>
+    
+</div>
+</template>
+
+<script>
+    return{
+        on: {
+            pageInit: function(){
+
+            },
+            pageAfterIn: function (event, page) {
+                var hasil = "<ul>";
+                app.dialog.preloader('Data Hotel ...');
+                $.getJSON(get_hotel, function(result){
+                    $.each(result, function(i, kolom){
+                        var jmlbtg = parseInt(kolom.Bintang);
+                        var btg = "";
+                        for(i=1; i<=jmlbtg; i++){
+                            btg = btg + '<i class="icon f7-icons">star</i>';
+                        }
+
+                        hasil = hasil + '\
+                            <li>\
+                                <a href="#" class="item-link item-content popover-open" data-popover=".popover-hotel" \
+                                    onclick="detail_hotel(\''+ kolom.Situs +'\',\''+ kolom.Lintang +'\',\''+ kolom.Bujur +'\',\''+ kolom.Handphone +'\')">\
+                                    <div class="item-inner">\
+                                        <div class="item-title-row">\
+                                            <div class="item-title" style="color: maroon">' + kolom.Nama + '</div>\
+                                            <div class="item-after" style="color: maroon">'+ btg +'</div>\
+                                        </div>\
+                                        <div class="item-subtitle">Telp Hotel: ' + kolom.Telepon + '</div>\
+                                        <div class="item-subtitle">Telp CS: ' + kolom.Handphone + ' ('+ kolom.NamaCS +')</div>\
+                                        <div class="item-text">\
+                                            ' + kolom.Alamat + '\
+                                        </div>\
+                                    </div>\
+                                </a>\
+                            </li>'
+                    });
+                    app.dialog.close();
+                    $("#blokhotel").html(hasil + "</ul>");
+                    //app.popup.open(".popup-hotel");
+                    
+                });
+            }
+        }
+       
+    }
+</script>

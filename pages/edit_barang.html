@@ -1,0 +1,166 @@
+<template>
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding" style="background:  #3F51B5; border-style: none; color: white">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+        </a>
+      </div>
+      <div class="title">Kelola Barang</div>
+    </div>
+  </div>
+  <div class="popup-tambah-barang">
+  <div class="page-content">
+    <div class="block">
+    <form class="list form-store-data" id="demo-form">
+          <input id="txtidbarang" type="hidden" placeholder="ex: 0909">
+      <ul>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">Kode Barang</div>
+            <div class="item-input-wrap">
+              <input id="txtkodebarang" type="text" placeholder="ex: 0909">
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">Nama Barang</div>
+            <div class="item-input-wrap">
+              <input id="txtbarang" type="text" placeholder="ex: sabun">
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">Harga</div>
+            <div class="item-input-wrap">
+              <input id="txtharga"  type="text" placeholder="ex:  1.000">
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">Merk</div>
+            <div class="item-input-wrap">
+              <input id="txtmerk"  type="text" placeholder="ex:rinso">
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">Satuan</div>
+            <div class="item-input-wrap input-dropdown-wrap">
+              <select id="cbosatuan"  placeholder="Please choose...">
+                <option value="lembar">Lembar</option>
+                <option value="pcs">Pcs</option>
+              </select>
+            </div>
+            <p class="row">
+            <button type="button" class="col button button-fill color-blue " @click="updatebarang()">Update</button>
+            <button type="button" class="col button button-fill color-red " @click="deletebarang()">Delete</button>
+            <button type="button" class="col button button-fill" onclick="app.router.back();">Batal</button>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
+</template>
+
+<script>
+    return{
+        methods: {
+            updatebarang: function(){
+                var idbarang = $("#txtidbarang").val();
+                var kodebarang = $("#txtkodebarang").val();
+                var barang = $("#txtbarang").val();
+                var harga = $("#txtharga").val();
+                var merk = $("#txtmerk").val();
+                var satuan = $("#cbosatuan").val();
+
+                if(idbarang == '' || kodebarang == '' || barang == '' || harga == '' || merk == '' || satuan == ''){
+                    app.dialog.alert("Ada Isian yang masih Kosong !", "Tambah Barang Gagal");
+                    return;
+                }
+
+                app.dialog.preloader('Proses Update ...');
+                $.ajax({
+                    url: update_barang,
+                    method: "POST",
+                    data: {idbarang: idbarang, kodebarang: kodebarang, barang: barang, harga: harga, merk: merk, satuan: satuan},
+                    cache: "false", 
+                    success: function(x){
+                      app.dialog.close();
+                      console.log(x);
+                        if(x == 1){
+                            app.dialog.alert("Data Berhasil DiUpdate","Update Sukses",
+                                function(){
+                                  reloadbarang();
+                                  app.router.back();
+                                }
+                            );
+                        }else{
+                            app.dialog.alert("Data Gagal DiUpdate","Update Gagal")
+                        }
+                    }
+                })
+            },
+             deletebarang: function(){
+                var idbarang = $("#txtidbarang").val();
+
+                if(idbarang == ''){
+                    app.dialog.alert("Ada Isian yang masih Kosong !", "Delete Barang Gagal");
+                    return;
+                }
+
+                app.dialog.preloader('Proses Delete ...');
+                $.ajax({
+                    url: delete_barang,
+                    method: "POST",
+                    data: {idbarang: idbarang},
+                    cache: "false", 
+                    success: function(x){
+                      app.dialog.close();
+                      console.log(x);
+                        if(x == 1){
+                            app.dialog.alert("Data Berhasil DiDelete"," Sukses",
+                                function(){
+                                  reloadbarang();
+                                  app.router.back();
+                                }
+                            );
+                        }else{
+                            app.dialog.alert("Data Gagal DiDelete","Delete Gagal")
+                        }
+                    }
+                })
+            }
+        },
+        on: {
+          pageInit: function(){
+
+           app.dialog.preloader('Load Barang ...');
+            var isi = "<ul>";
+            $.getJSON(filter_barang, {id: this.$route.query.id}, function(result){
+                $.each(result, function(i, kolom){
+                    $("#txtidbarang").val(kolom.id_barang);                  
+                    $("#txtkodebarang").val(kolom.kd_brg);
+                    $("#txtbarang").val(kolom.nm_barang);
+                    $("#txtharga").val(kolom.hrg_jual);
+                    $("#txtmerk").val(kolom.merk);
+                    $("#cbosatuan").val(kolom.satuan);
+                });
+                app.dialog.close();
+            });
+          }
+        }
+
+    }
+</script>

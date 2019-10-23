@@ -1,0 +1,133 @@
+<template>
+<div class="page">
+  <div class="navbar">
+    <div class="navbar-inner sliding" style="background:  #3F51B5; border-style: none; color: white">
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+        </a>
+      </div>
+      <div class="title">Tambah Konfirmasi</div>
+    </div>
+  </div>
+  <div class="popup-tambah-konfirmasi">
+  <div class="page-content">
+    <div class="block">
+    <form class="list form-store-data" style="margin-top: -20px;">
+      <ul>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">No Rekening</div>
+            <div class="item-input-wrap">
+              <input id="txtnorek"  type="text" placeholder="ex : 209819091">
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">Nominal</div>
+            <div class="item-input-wrap">
+              <input id="txtnominal"  type="text" placeholder="ex:  Rp. 1000.000">
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">Atas Nama</div>
+            <div class="item-input-wrap">
+              <input id="txtatasnm"  type="text" placeholder="ex:  ibu rita">
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">Jam Transfer</div>
+            <div class="item-input-wrap">
+              <input id="txtjam"  type="time" placeholder="ex:  23.00">
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">Tanggal Transfer</div>
+            <div class="item-input-wrap">
+              <input id="txttanggal"  type="date" >
+              <span class="input-clear-button"></span>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <div class="item-title item-label">Keterangan</div>
+            <div class="item-input-wrap">
+              <textarea id="txtketerangan" placeholder="ex: top up saldo"></textarea>
+            </div>
+          </div>
+        </li>
+        <li class="item-content item-input">
+          <div class="item-inner">
+            <!-- <div class="item-title item-label">Satuan</div>
+            <div class="item-input-wrap input-dropdown-wrap">
+              <select id="cbosatuan"  placeholder="Please choose...">
+                <option value="lembar">Lembar</option>
+                <option value="pcs">Pcs</option>
+              </select>
+            </div> -->
+            <p class="row">
+            <button type="button" class="col button button-fill color-red " @click="tambahkonfirmasi">Simpan</button>
+            <button type="button" class="col button button-fill" onclick="app.router.back();">Batal</button>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </form>
+  </div>
+</div>
+</template>
+
+<script>
+    return{
+        methods: {
+            tambahkonfirmasi: function(){
+                var idsantri = localStorage.gz481;
+                var norek = $("#txtnorek").val();
+                var nominal = $("#txtnominal").val();
+                var atasnm = $("#txtatasnm").val();
+                var jam = $("#txtjam").val();
+                var tgl = $("#txttgl").val();
+                var keterangan = $("#txtketerangan").val();
+
+                if(idsantri == '' || norek == '' || nominal == '' || atasnm == '' || jam == '' || tgl == '' || keterangan == ''){
+                    app.dialog.alert("Ada Isian yang masih Kosong !", "Tambah Konfirmasi Gagal");
+                    return;
+                }
+
+                app.dialog.preloader('Proses Simpan ...');
+                $.ajax({
+                    url: simpan_konfirmasi,
+                    method: "POST",
+                    data: {idsantri: idsantri, norek: norek, nominal: nominal, atasnm: atasnm, jam: jam , tgl: tgl , keterangan: keterangan},
+                    cache: "false", 
+                    success: function(x){
+                      app.dialog.close();
+                      console.log(x);
+                        if(x == 1){
+                            app.dialog.alert("Data Berhasil Disimpan","Simpan Sukses",
+                                function(){
+                                  reloadkonfirmasi();
+                                  app.router.back();
+                                }
+                            );
+                        }else{
+                            app.dialog.alert("Data Gagal Disimpan","Simpan Gagal")
+                        }
+                    }
+                })
+            }
+        }
+    }
+</script>

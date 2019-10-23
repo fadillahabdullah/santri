@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns     = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "com.alghozali2"
+        version   = "1.0.3"
+        xmlns:android = "http://schemas.android.com/apk/res/android">
+
+    <name>Santri Al-Ghozali</name>
+
+    <description>
+        Aplikasi Mobile Santri Al-Ghozali
+    </description>
+
+    <author href="http://unwaha.ac.id" email="fadil.abdullah97pps@gmail.com">
+        Pondok Pesantren Al-Ghozali Bahrul Ulum Tambakberas Jombang
+    </author>
+
+    <platform name="android">
+        <preference name="android-minSdkVersion" value="20" />
+        <preference name="android-maxSdkVersion" value="28" />
+        <preference name="android-targetSdkVersion" value="26" />
+        <preference name="android-installLocation" value="auto" />
+        <custom-config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.CAMERA"/>
+        </custom-config-file>
+       
+        
+    </platform>
+    <!-- <config-file platform="android" parent="/manifest" mode="add">
+        <uses-permission android:name="com.hpn2019.permission.CAMERA" />
+    </config-file> -->
+    
+
+    <icon src="img/gza.png" />
+    <plugin name="cordova-plugin-whitelist" version="1" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~3" />
+    <plugin name="cordova-plugin-camera" spec="~2" />
+    <plugin name="phonegap-plugin-barcodescanner" spec="~3" />
+    <plugin name="cordova-plugin-dialogs" spec="~2" />
+    <plugin name="call-number" source="npm" />
+    <plugin name="cordova-plugin-android-permissions" source="npm" />
+    <access origin="*" />
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
+</widget>

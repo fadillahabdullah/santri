@@ -1,0 +1,644 @@
+<template>
+<div class="page">
+    <div class="navbar no-shadow">
+        <div class="navbar-inner sliding">
+            <div class="title">Registrasi Peserta</div>
+            <div class="right">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">close</i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <!-- <p class="row">
+            <a href="#" class="col text-align-center color-blue popover-open" data-popover=".popover-profil">
+                <img src="img/profle.png" class="besar-icon" id="fotopprofil"><br>Pilih Foto Profil
+            </a>
+            <a href="#" class="col text-align-center color-blue popover-open" data-popover=".popover-ktp">
+                <img src="img/card.png" class="besar-icon" id="fotoktp"><br>Pilih Foto KTP 
+                
+            </a> 
+        </p> --><!-- BLOK INPUT FOTO/KTP -->
+        <form class="list" style="margin-top: 5px;">
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">person</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Nama Peserta</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtnama" placeholder="Wajib diisi">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> 
+            </div> <!-- INPUT NAMA -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">keyboard</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">NIK (ex: 351719xxxxxxxxxx)</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtnik" placeholder="Wajib diisi">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> 
+            </div> <!-- INPUT NIK -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">bolt</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Jabatan (ex: Pranata Humas)</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtjab" placeholder="Wajib diisi">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> <!-- INPUT  --> 
+            </div> <!-- INPUT JABATAN -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">home</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Asal Instansi</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtinstansi" placeholder="Wajib diisi" readonly>
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="item-inner">
+                        <div class="item-title item-label">&nbsp</div>
+                        <div class="item-input-wrap">
+                            <button type="button" class="button button-fill color-green" @click="tampilinstansi">
+                                ....
+                            </button>
+                        </div>
+                    </div>
+                </div> 
+            </div> <!-- INPUT INSTANSI -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">bookmark</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Status Peserta</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtstpeserta" placeholder="Wajib diisi" readonly>
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="item-inner">
+                        <div class="item-title item-label">&nbsp</div>
+                        <div class="item-input-wrap">
+                            <button type="button" class="button button-fill color-green" @click="tampilstatus">
+                                ....
+                            </button>
+                        </div>
+                    </div>
+                </div> 
+            </div> <!-- INPUT STATUS PESERTA -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">document_text</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Alamat (isi sesuai alamat di e-KTP)</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtalamat" placeholder="Opsional">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> 
+            </div> <!-- INPUT ALAMAT -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">phone</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Handphone (ex: 085648915901)</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txthp" placeholder="Wajib diisi">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> 
+            </div> <!-- INPUT HP -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">email</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Email (ex: sample@gmail.com)</div>
+                    <div class="item-input-wrap">
+                        <input type="email" id="txtemail" placeholder="Opsional">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> 
+            </div> <!-- INPUT EMAIL -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">drawers</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Fasilitas</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtfasilitas" readonly placeholder="Opsional">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="item-inner">
+                        <div class="item-title item-label">&nbsp</div>
+                        <div class="item-input-wrap">
+                            <button type="button" class="button button-fill color-green" @click="tampilfasilitas">
+                                ....
+                            </button>
+                        </div>
+                    </div>
+                </div> 
+            </div> <!-- INPUT FASILITAS -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">home</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Hotel</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txthotel" readonly placeholder="Opsional">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="item-inner">
+                        <div class="item-title item-label">&nbsp</div>
+                        <div class="item-input-wrap">
+                            <button type="button" class="button button-fill color-green" @click="tampilhotel">
+                                ....
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- INPUT HOTEL -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">tags</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Jenis Kamar</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtjeniskamar" placeholder="Opsional">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> 
+            </div> <!-- INPUT JENIS KAMAR -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">more</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">No Kamar</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtnokamar" placeholder="Opsional">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> 
+            </div> <!-- INPUT NO KAMAR -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">ticket</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Captcha</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtcaptcha" readonly>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Jawaban</div>
+                    <div class="item-input-wrap">
+                        <input type="number" id="txtjcaptcha" placeholder="Wajib diisi">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="item-inner">
+                        <div class="item-title item-label">&nbsp</div>
+                        <div class="item-input-wrap">
+                            <button type="button" class="button button-fill color-green" @click="reloadcaptcha">
+                                <i class="icon f7-icons">reload</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- CAPTCHA -->
+            <div class="block">
+                <p class="row">
+                    <button type="button" class="col button button-fill" @click="simpandata">Daftar</button>
+                    <button type="button" class="col button button-fill color-red" @click="formkosong">Reset</button>
+                    <button type="button" class="col button button-fill color-red" onclick="app.router.back()">Batal</button>
+                </p>
+            </div>
+        </form>
+
+        <div class="popover popover-profil">
+            <div class="popover-inner">
+                <div class="list">
+                    <ul>
+                        <li><a href="#" class="list-button itemlink- popover-close" @click="kameraprofil">Kamera</a></li>
+                        <li><a href="#" class="list-button item-link popover-close" @click="galeriprofil">Galeri</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover popover-ktp">
+            <div class="popover-inner">
+                <div class="list">
+                    <ul>
+                        <li><a href="#" class="list-button item-link popover-close" @click="kameraktp">Kamera</a></li>
+                        <li><a href="#" class="list-button item-link popover-close" @click="galeriktp">Galeri</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup popup-instansi">
+            <div class="page">
+                <div class="navbar no-shadow">
+                    <div class="navbar-inner">
+                        <div class="title">Pilih Instansi</div>
+                        <div class="right">
+                            <a href="#" class="link popup-close"><i class="icon f7-icons">close</i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="list links-list" id="blokinstansi"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup popup-status">
+            <div class="page">
+                <div class="navbar no-shadow">
+                    <div class="navbar-inner">
+                        <div class="title">Pilih Status Peserta</div>
+                        <div class="right">
+                            <a href="#" class="link popup-close"><i class="icon f7-icons">close</i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="list links-list" id="blokstatus"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup popup-fasilitas">
+            <div class="page">
+                <div class="navbar no-shadow">
+                    <div class="navbar-inner">
+                        <div class="title">Set Fasilitas</div>
+                        <div class="right">
+                            <a href="#" class="link popup-close"><i class="icon f7-icons">close</i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="list simple-list" id="blokfasilitas"></div>
+                    <div class="block">
+                    <p class="row">
+                        <button type="button" class="col-50 button button-fill" @click="setfasilitas">Set</button>
+                        <button type="button" class="col-50 button button-fill color-red">Hapus</button>
+                    </p>
+                </div>
+                </div>
+            </div>
+        </div>
+
+         <div class="popup popup-hotel">
+            <div class="page">
+                <div class="navbar no-shadow">
+                    <div class="navbar-inner">
+                        <div class="title">Pilih Hotel</div>
+                        <div class="right">
+                            <a href="#" class="link popup-close"><i class="icon f7-icons">close</i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="list" id="blokphotel"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+</template>
+
+<script>
+    return{
+        methods: {
+            tampilinstansi: function(){
+                var hasil = "<ul>";
+                app.dialog.preloader('Data Instansi ...');
+                $.getJSON(get_instansi, function(result){
+                    $.each(result, function(i, kolom){
+                        hasil = hasil + '<li><a href="#" \
+                            onclick="reg_set_instansi(\''+ kolom.InstansiID + '|' + kolom.Nama +'\')">'+ kolom.Nama +'</a></li>';
+                    });
+                    $("#blokinstansi").html(hasil + '</ul>');
+                    app.dialog.close();
+                    app.popup.open('.popup-instansi');
+                });
+            },
+            tampilstatus: function(){
+                var hasil = "<ul>";
+                app.dialog.preloader('Data Status Peserta ...');
+                $.getJSON(get_status, function(result){
+                    $.each(result, function(i, kolom){
+                        hasil = hasil + '<li><a href="#" \
+                            onclick="reg_set_status(\''+ kolom.StatusPesertaID + '|' + kolom.Nama +'\')">'+ kolom.Nama +'</a></li>';
+                    });
+                    $("#blokstatus").html(hasil + '</ul>');
+                    app.dialog.close();
+                    app.popup.open('.popup-status');
+                });
+            },
+            tampilfasilitas: function(){
+                localStorage.removeItem('tempfasilitas');
+                
+                var hasil = "<ul>";
+                var jml = 0;
+                app.dialog.preloader('Data Fasilitas ...');
+                $.getJSON(get_fasilitas, function(result){
+                    $.each(result, function(i, kolom){
+                        jml++;
+                        // hasil = hasil + '<li><a href="#" \
+                        //     onclick="reg_set_fasilitas(\'.'+ kolom.FasilitasID + '.\')">'+ kolom.Nama +'</a></li>';
+                        hasil = hasil + '\
+                            <li><span>'+ kolom.Nama +'</span>\
+                            <label class="toggle toggle-init color-blue">\
+                            <input type="checkbox" value=".'+ kolom.FasilitasID +'." id="f'+ kolom.FasilitasID +'">\
+                            <span class="toggle-icon"></span>\
+                            </label></li>';
+                    });
+                    $("#blokfasilitas").html(hasil + '</ul>');
+                    app.dialog.close();
+                    app.popup.open('.popup-fasilitas');
+                    localStorage.setItem('tempfasilitas',jml);
+                });
+            },
+            setfasilitas: function(){
+                $("#txtfasilitas").val('');
+                for(i=1; i<=localStorage.tempfasilitas; i++){
+                    var bbb = $('#f'+i).is(':checked');
+                    if(bbb == true){
+                        $("#txtfasilitas").val($("#txtfasilitas").val() + $('#f'+i).val());
+                        //app.dialog.alert($('#f'+i).val());
+                    }
+                }
+                var bbx = $("#txtfasilitas").val();
+                var bby = bbx.replace(/\.\./g,'.');
+                $("#txtfasilitas").val(bby);
+                app.popup.close('.popup-fasilitas');
+            },
+            tampilhotel: function(){
+                var hasil = "<ul>";
+                app.dialog.preloader('Data Hotel ...');
+                $.getJSON(get_hotel, function(result){
+                    $.each(result, function(i, kolom){
+                        // hasil = hasil + '<li><a href="#" \
+                        //     onclick="reg_set_hotel(\''+ kolom.HotelID + '|' + kolom.Nama +'\')">'+ kolom.Nama +'(<i class="icon f7-icons">star</i> '+ kolom.Bintang +') </a></li>';
+                        var jmlbtg = parseInt(kolom.Bintang);
+                        var btg = "";
+                        for(i=1; i<=jmlbtg; i++){
+                            btg = btg + '<i class="icon f7-icons">star</i>';
+                        }
+                        hasil = hasil + '\
+                            <li>\
+                                <a href="#" class="item-link item-content" \
+                                    onclick="reg_set_hotel(\''+ kolom.HotelID + '|' + kolom.Nama +'\')">\
+                                    <div class="item-media"><i class="icon f7-icons">home</i></div>\
+                                    <div class="item-inner">\
+                                        <div class="item-title">\
+                                            <div class="item-header">'+ btg +'</div>\
+                                            '+ kolom.Nama +'\
+                                        </div>\
+                                        <div class="item-after"></div>\
+                                    </div>\
+                                </a>\
+                            </li>'
+                    });
+                    $("#blokphotel").html(hasil + '</ul>');
+                    app.dialog.close();
+                    app.popup.open('.popup-hotel');
+                });
+            },
+            simpandata: function(){
+                var nm = $("#txtnama").val();
+                var nik = $("#txtnik").val();
+                var jb = $("#txtjab").val();
+                var ins = $("#txtinstansi").val().split('|');
+                var sts = $("#txtstpeserta").val().split('|');
+                var alm = $("#txtalamat").val();
+                var hp = $("#txthp").val();
+                var em = $("#txtemail").val();
+                var fs = $("#txtfasilitas").val();
+                var ht = $("#txthotel").val().split('|');
+                var jns = $("#txtjeniskamar").val();
+                var nokm = $("#txtnokamar").val();
+                var capt = $("#txtjcaptcha").val();
+                //var fprofil = $("#fotopprofil").attr('src');
+                //var fktp = $("#fotoktp").attr('src');
+                var b64profil = ""; var b64ktp = "";
+
+                if(nm == '' || nik == '' || jb == '' || ins[0] == '' || sts[0] == '' || hp == '' || capt == ''){
+                    app.dialog.alert("Ada Isian yang masih Kosong !", "Registrasi Gagal");
+                    return;
+                }
+
+                if(parseInt(capt) != parseInt(localStorage.captcha)){
+                    app.dialog.alert("Captcha Salah", "Registrasi Gagal");
+                    return;
+                }
+
+                // if(fprofil == 'img/profle.png' || fprofil == ''){b64profil = "";}
+                // else{
+                //     b64profil = getBase64Image(document.getElementById("fotopprofil"));
+                // }
+
+                // if(fktp == 'img/card.png' || fktp == ''){b64ktp = "";}
+                // else{
+                //     b64ktp = getBase64Image(document.getElementById("fotoktp"));
+                // }
+
+                // if(fprofil == 'img/profle.png' || fprofil == ''){b64profil = "";}else{b64profil = fprofil;}
+                // if(fktp == 'img/card.png' || fktp == ''){b64ktp = "";}else{b64ktp = fktp;}
+
+                app.dialog.preloader('Proses Registrasi ...');
+                $.ajax({
+                    url: api_registrasi,
+                    method: "POST",
+                    data: {nama: nm, nik: nik, jabatan: jb, instansi: ins[0], status: sts[0], alamat: alm, handphone: hp, email: em, fasilitas: fs, ftpro: b64profil, ftktp: b64ktp, hotel: ht[0], tipekamar: jns, nokamar: nokm, petugas: localStorage.XxbS784g},
+                    cache: "false", 
+                    success: function(x){
+                        console.log(x);
+                        if(x == "1"){
+                            app.dialog.alert("Registrasi Berhasil di Lakukan","Registrasi Sukses",
+                                function(){
+                                    app.router.back();
+                                }
+                            );
+                        }
+                        else{app.dialog.alert("Registrasi Gagal, Periksa Kembali Isian Anda !","Registrasi Gagal");}
+                        app.dialog.close();
+                    }
+                })
+
+            },
+
+            reloadcaptcha: function(){
+                var angka1 = Math.floor(Math.random() * 25) + 1;
+                var angka2 = Math.floor(Math.random() * 25) + 1;
+                var hasil = angka1 + angka2;
+                localStorage.setItem("captcha", hasil);
+                $("#txtcaptcha").val(angka1 + " + " + angka2);
+                $("#txtjcaptcha").val('');
+            },
+
+            kameraprofil: function(){ 
+                navigator.camera.getPicture(onSuccesskp, onFailkp, {
+                    quality: 100, 
+                    destinationType: Camera.DestinationType.FILE_URI
+                });  
+   
+                function onSuccesskp(imageData){ 
+                    var fotopilih = document.getElementById('fotopprofil');
+                    fotopilih.src = imageData;
+                }  
+   
+                function onFailkp(message){app.dialog.alert('Failed because: ' + message,"Gagal Foto");} 
+            },
+
+            galeriprofil: function(){ 
+                navigator.camera.getPicture(onSuccessgp, onFailgp, {
+                    quality: 50, 
+                    destinationType: Camera.DestinationType.FILE_URI,
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+                });  
+   
+                function onSuccessgp(imageData){ 
+                    var fotopilih = document.getElementById('fotopprofil');
+                    fotopilih.src = imageData;
+                }  
+   
+                function onFailgp(message){app.dialog.alert('Failed because: ' + message,"Gagal Foto");} 
+            },
+
+            kameraktp: function(){ 
+                navigator.camera.getPicture(onSuccesskk, onFailkk, {
+                    quality: 100, 
+                    destinationType: Camera.DestinationType.FILE_URI
+                });  
+   
+                function onSuccesskk(imageData){ 
+                    var fotopilih = document.getElementById('fotoktp');
+                    fotopilih.src = imageData;
+                }  
+   
+                function onFailkk(message){app.dialog.alert('Failed because: ' + message,"Gagal Foto");} 
+            },
+
+            galeriktp: function(){ 
+                navigator.camera.getPicture(onSuccessgk, onFailgk, {
+                    quality: 50, 
+                    destinationType: Camera.DestinationType.FILE_URI,
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+                });  
+   
+                function onSuccessgk(imageData){ 
+                    var fotopilih = document.getElementById('fotoktp');
+                    fotopilih.src = imageData;
+                }  
+   
+                function onFailgk(message){app.dialog.alert('Failed because: ' + message,"Gagal Foto");} 
+            },
+
+            formkosong: function(){
+                $("#txtnama").val('');
+                $("#txtnik").val('');
+                $("#txtjab").val('');
+                $("#txtinstansi").val('');
+                $("#txtstpeserta").val('');
+                $("#txtalamat").val('');
+                $("#txthp").val('');
+                $("#txtemail").val('');
+                $("#txtfasilitas").val('');
+                $("#txthotel").val('');
+                $("#txtjeniskamar").val('');
+                $("#txtnokamar").val('');
+                $("#txtjcaptcha").val('');
+                //$("#fotopprofil").attr('src','img/profle.png');//document.getElementById('fotoprofil').src;
+                //$("#fotoktp").attr('src','img/card.png');
+            }
+        },
+        on: {
+            pageAfterIn: function(){
+                var angka1 = Math.floor(Math.random() * 25) + 1;
+                var angka2 = Math.floor(Math.random() * 25) + 1;
+                var hasil = angka1 + angka2;
+                localStorage.setItem("captcha", hasil);
+                $("#txtcaptcha").val(angka1 + " + " + angka2);
+                $("#txtjcaptcha").val('');
+
+                $("#txtnama").val('');
+                $("#txtnik").val('');
+                $("#txtjab").val('');
+                $("#txtinstansi").val('');
+                $("#txtstpeserta").val('');
+                $("#txtalamat").val('');
+                $("#txthp").val('');
+                $("#txtemail").val('');
+                $("#txtfasilitas").val('');
+                $("#txthotel").val('');
+                $("#txtjeniskamar").val('');
+                $("#txtnokamar").val('');
+                $("#txtjcaptcha").val('');
+                //$("#fotopprofil").attr('src','img/profle.png');//document.getElementById('fotoprofil').src;
+                //$("#fotoktp").attr('src','img/card.png');
+            }
+        }
+    }
+</script>

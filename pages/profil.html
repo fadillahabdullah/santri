@@ -1,0 +1,349 @@
+<template>
+<div class="page">
+    <div class="navbar no-shadow">
+        <div class="navbar-inner sliding">
+            <div class="title">Profil Peserta</div>
+            <div class="right">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">close</i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <p class="row">
+            <a href="#" class="col text-align-center color-blue popover-open" data-popover=".popover-profil">
+                <img src="img/profle.png" class="besar-icon" id="imgprofil"><br>Pilih Foto Profil
+            </a>
+            <a href="#" class="col text-align-center color-blue popover-open" data-popover=".popover-ktp">
+                <img src="img/card.png" class="besar-icon" id="imgktp"><br>Pilih Foto KTP 
+                
+            </a> 
+        </p><!-- BLOK INPUT FOTO/KTP -->
+       
+        <form class="list" style="margin-top: -10px;">
+            <input type="hidden" id="txtIDpesertaKelola">
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">person</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Nama Peserta</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtnama" placeholder="Wajib diisi">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> 
+            </div> <!-- INPUT NAMA -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">keyboard</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">NIK (ex: 351719xxxxxxxxxx)</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtnik" placeholder="Wajib diisi">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> 
+            </div> <!-- INPUT NIK -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">bolt</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Jabatan (ex: Pranata Humas)</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtjab" placeholder="Wajib diisi">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> <!-- INPUT  --> 
+            </div> <!-- INPUT JABATAN -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">document_text</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Alamat (isi sesuai alamat di e-KTP)</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtalamat" placeholder="Opsional">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> 
+            </div> <!-- INPUT ALAMAT -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">phone</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Handphone (ex: 085648915901)</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txthp" placeholder="Wajib diisi">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> 
+            </div> <!-- INPUT HP -->
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">email</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Email (ex: sample@gmail.com)</div>
+                    <div class="item-input-wrap">
+                        <input type="email" id="txtemail" placeholder="Opsional">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div> 
+            </div> <!-- INPUT EMAIL -->
+            
+            <div class="item-content item-input">
+                <div class="col-15">
+                    <div class="item-media">
+                        <i class="icon f7-icons">ticket</i>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Captcha</div>
+                    <div class="item-input-wrap">
+                        <input type="text" id="txtcaptcha" readonly>
+                    </div>
+                </div>
+                <div class="item-inner">
+                    <div class="item-title item-label">Jawaban</div>
+                    <div class="item-input-wrap">
+                        <input type="number" id="txtjcaptcha" placeholder="Wajib diisi">
+                        <span class="input-clear-button"></span>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="item-inner">
+                        <div class="item-title item-label">&nbsp</div>
+                        <div class="item-input-wrap">
+                            <button type="button" class="button button-fill color-green" @click="reloadcaptcha">
+                                <i class="icon f7-icons">reload</i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- CAPTCHA -->
+            <div class="block">
+                <p class="row">
+                    <button type="button" class="col button button-fill" @click="updatedata">Update</button>
+                </p>
+            </div>
+        </form>
+
+        <div class="popover popover-profil">
+            <div class="popover-inner">
+                <div class="list">
+                    <ul>
+                        <li><a href="#" class="list-button itemlink- popover-close" @click="kameraprofil">Kamera</a></li>
+                        <li><a href="#" class="list-button item-link popover-close" @click="galeriprofil">Galeri</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="popover popover-ktp">
+            <div class="popover-inner">
+                <div class="list">
+                    <ul>
+                        <li><a href="#" class="list-button item-link popover-close" @click="kameraktp">Kamera</a></li>
+                        <li><a href="#" class="list-button item-link popover-close" @click="galeriktp">Galeri</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</template>
+
+<script>
+    return{
+        methods: {
+            updatedata: function(){
+                var idps = $("#txtIDpesertaKelola").val();
+                var nm = $("#txtnama").val();
+                var nik = $("#txtnik").val();
+                var jb = $("#txtjab").val();
+                var alm = $("#txtalamat").val();
+                var hp = $("#txthp").val();
+                var em = $("#txtemail").val();
+                var capt = $("#txtjcaptcha").val();
+                // var fprofil = $("#fotopprofil").attr('src');//document.getElementById('fotoprofil').src;
+                // var fktp = $("#fotoktp").attr('src');
+                // var b64profil; var b64ktp;
+                // alert(fprofil);
+
+                if(nm == '' || nik == '' || jb == '' || hp == '' || capt == ''){
+                    app.dialog.alert("Ada Isian yang masih Kosong !", "Update Gagal");
+                    return;
+                }
+
+                if(capt == ''){
+                    app.dialog.alert("Captcha Belum diisi", "Update Gagal");
+                    return;
+                }
+
+                if(idps == ''){
+                    app.dialog.alert("Data ini Bermasalah, Silahkan Hubungi Panitia", "Update Gagal");
+                    return;
+                }
+
+                if(parseInt(capt) != parseInt(localStorage.captcha)){
+                    app.dialog.alert("Captcha Salah", "Update Gagal");
+                    return;
+                }
+
+                app.dialog.preloader('Update Profil ...');
+                $.ajax({
+                    url: update_profil,
+                    method: "POST",
+                    data: {pesertaid: idps, nama: nm, nik: nik, jabatan: jb, alamat: alm, handphone: hp, email: em},
+                    cache: "false", 
+                    success: function(x){
+                        console.log(x);
+                        if(x == "1"){
+                            app.dialog.alert("Update Berhasil di Lakukan","Update Sukses",
+                                function(){app.router.back();}
+                            );
+                        }
+                        else{app.dialog.alert("Update Gagal, Periksa Kembali Isian Anda !","Update Gagal");}
+                        app.dialog.close();
+                    }
+                })
+            },
+           
+
+            reloadcaptcha: function(){
+                var angka1 = Math.floor(Math.random() * 25) + 1;
+                var angka2 = Math.floor(Math.random() * 25) + 1;
+                var hasil = angka1 + angka2;
+                localStorage.setItem("captcha", hasil);
+                $("#txtcaptcha").val(angka1 + " + " + angka2);
+                $("#txtjcaptcha").val('');
+            },
+
+            kameraprofil: function(){ 
+                navigator.camera.getPicture(onSuccesskp, onFailkp, {
+                    quality: 30, 
+                    destinationType: Camera.DestinationType.FILE_URI
+                });  
+   
+                function onSuccesskp(imageData){ 
+                    $("#imgprofil").attr("src", imageData);
+                    ubahke64image(imageData);
+                }  
+   
+                function onFailkp(message){app.dialog.alert('Failed because: ' + message,"Gagal Foto");} 
+            },
+            galeriprofil: function(){ 
+                navigator.camera.getPicture(onSuccessgp, onFailgp, {
+                    quality: 30, 
+                    destinationType: Camera.DestinationType.FILE_URI,
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+                });  
+   
+                function onSuccessgp(imageData){ 
+                    $("#imgprofil").attr("src", imageData);
+                    ubahke64image(imageData);
+                }  
+   
+                function onFailgp(message){app.dialog.alert('Failed because: ' + message,"Gagal Foto");} 
+            },
+            kameraktp: function(){ 
+                navigator.camera.getPicture(onSuccesskk, onFailkk, {
+                    quality: 30, 
+                    destinationType: Camera.DestinationType.FILE_URI
+                });  
+   
+                function onSuccesskk(imageData){ 
+                    $("#imgktp").attr("src", imageData);
+                    ubahke64image4(imageData);
+                }
+
+                function onFailkk(message){app.dialog.alert('Failed because: ' + message,"Gagal Foto");} 
+            },
+            galeriktp: function(){ 
+                navigator.camera.getPicture(onSuccessgk, onFailgk, {
+                    quality: 30, 
+                    destinationType: Camera.DestinationType.FILE_URI,
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY
+                });  
+   
+                function onSuccessgk(imageData){ 
+                    $("#imgktp").attr("src", imageData);
+                    ubahke64image4(imageData);
+                }  
+   
+                function onFailgk(message){app.dialog.alert('Failed because: ' + message,"Gagal Foto");} 
+            },
+            // formkosong: function(){
+            //     $("#txtkeyword").val('');
+            //     $("#txtIDpesertaKelola").val('');
+            //     $("#txtnama").val('');
+            //     $("#txtnik").val('');
+            //     $("#txtjab").val('');
+            //     $("#txtinstansi").val('');
+            //     $("#txtstpeserta").val('');
+            //     $("#txtalamat").val('');
+            //     $("#txthp").val('');
+            //     $("#txtemail").val('');
+            //     $("#txtfasilitas").val('');
+            //     $("#txthotel").val('');
+            //     $("#txtjeniskamar").val('');
+            //     $("#txtnokamar").val('');
+            //     $("#txtjcaptcha").val('');
+            //     $("#fotopprofil").attr('src','img/profle.png');//document.getElementById('fotoprofil').src;
+            //     $("#fotoktp").attr('src','img/card.png');
+            // }
+        },
+        on: {
+            pageAfterIn: function(){
+                var angka1 = Math.floor(Math.random() * 25) + 1;
+                var angka2 = Math.floor(Math.random() * 25) + 1;
+                var hasil = angka1 + angka2;
+                localStorage.setItem("captcha", hasil);
+                $("#txtcaptcha").val(angka1 + " + " + angka2);
+                $("#txtjcaptcha").val('');
+
+                app.dialog.preloader('Tampilkan Profil ...');
+                $.getJSON(filter_peserta, {z:localStorage.XxbS784g, y:'peserta'}, function(result){
+                    $.each(result, function(i, kolom){
+                        $('#txtIDpesertaKelola').val(kolom.PesertaID);
+                        $('#txtnama').val(kolom.Nama);
+                        $("#txtnik").val(kolom.KTP);
+                        $("#txtjab").val(kolom.Jabatan);
+                        $("#txtalamat").val(kolom.Alamat);
+                        $("#txthp").val(kolom.Handphone);
+                        $("#txtemail").val(kolom.Email);
+                        if(kolom.Foto == ''){
+                            $("#imgprofil").attr('src','img/profle.png');
+                        }else{
+                            $("#imgprofil").attr('src', pathfoto + kolom.Foto);
+                        }
+                        if(kolom.Dokumen == ''){
+                            $("#imgktp").attr('src','img/card.png');
+                        }else{
+                            $("#imgktp").attr('src', pathdokumen + kolom.Dokumen);
+                        }
+                    });
+                    app.dialog.close();
+                });
+            }
+        }
+    }
+</script>

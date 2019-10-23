@@ -1,0 +1,535 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<meta name="theme-color" content="#3F51B5">
+	<title>Santri</title>
+	<link rel="stylesheet" href="packages/core/css/framework7.min.css">
+	<link rel="stylesheet" href="css/app.css">
+	<link rel="apple-touch-icon" href="img/f7-icon-square.png">
+	<link rel="icon" href="img/gzaicon.png">
+  <style>
+      .jedatombol {margin-right: 3%; margin-left: 3%;}
+      .marginkonten {margin-right: 10px; margin-left: 10px;}
+      .full {width: 96%; margin-left: 2%; margin-right: 2%; margin-top: 1%;}
+      .besar-icon {width: 60%;}
+      .slidergambar {width: 100%; height: 250px;}
+      .bg{background:#ffffff;}
+      .overlay-blueblack {
+          background: linear-gradient(to top, #1ad098 -10%, #2f18bd 100%, #a09999 121%);
+          background-position-x: initial;
+          background-position-y: initial;
+          background-size: 200% auto;
+          background-repeat-x: initial;
+          background-repeat-y: initial;
+          background-attachment: initial;
+          background-origin: initial;
+          background-clip: initial;
+          background-color: initial;
+      }
+  </style>
+</head>
+<body>
+<div id="app">
+	<div class="statusbar"></div>
+    <div class="view view-main view-init ios-edges" data-url="/" name="home">
+      <div class="page">
+          <div class="navbar no-shadow" style="border-style: none; color: #ffffff; background: linear-gradient(to top, #3F51B5  -10%, #1ad098 100%, #a09999 121%);">
+              <div class="navbar-inner">
+                  <div class="left">
+      				      	<a href="#" class="link icon-only panel-open" data-panel="left">
+        				      	<img class="navbar-brand-logo" src="img/gzaicon.png" title="e-Santri">
+      				      	</a>
+                  </div>
+                  <div class="title" style="left:-20px;">Santri</div>
+                  <div class="right" id="menu_atas">
+                      <a href="#" class="link icon-only">
+                          <i class="f7-icons">bell_fill</i>
+                      </a>
+                      <a href="#" class="link icon-only" onclick="refresh()">
+                          <i class="f7-icons">reload</i>
+                      </a>
+                  </div>
+              </div>
+      	  </div>
+          <div class="bg" style="background: #ffffff">
+              <title>Santri</title>
+          </div>
+<div class="toolbar tabbar toolbar-bottom-md no-shadow tabbar-label" style="background: #3F51B5;border-style: none; font-color:blue; height: 65px;"> 
+    <div class="toolbar-inner">
+        <a href="#tab-1" class="tab-link tab-link-active">
+            <i class="icon f7-icons" style="margin-bottom: 5px;">home</i>
+            <span class="tabbar-label" style="font-size: 10px;">BERANDA</span>
+        </a>
+        <a href="#tab-2" class="tab-link">
+            <i class="icon material-icons" style="margin-bottom: 5px;">event_note</i>
+            <span class="tabbar-label" style="font-size: 10px;">LOG HISTORY</span>
+        </a>
+        <a href="#tab-3" class="tab-link">
+            <i class="icon material-icons" style="margin-bottom: 5px;">event_available</i>
+            <span class="tabbar-label" style="font-size: 10px;">KONFIRMASI</span>
+        </a>
+        <a href="#tab-4" class="tab-link">
+            <i class="icon f7-icons" style="margin-bottom: 5px;">person</i>
+            <span class="tabbar-label" style="font-size: 10px;">AKUN</span>
+        </a>
+    </div>
+</div>
+  <div class="tabs-swipeable-wrap">
+        <div class="tabs">
+            <div id="tab-1" class="page-content tab tab-active">
+                <div class="content-block-title jedatombol">
+                    <div class="chip color-green full">
+                       <div class="chip-label">Informasi Saldo Anda</div>
+                    </div>
+                </div>
+                <div class="list">
+                  <div class="login-screen-title" id="bloknamasantri"><p></div>
+                   <div class="login-screen-title" id="bloksaldosantri">Rp 0,-</div>
+                </div>
+                <div id="bloklapor" style="margin-bottom: 25px;"></div>
+        </div>
+
+        <div id="tab-2" class="page-content tab">
+                <div class="chip color-green full">
+                    <div class="chip-label">Log History</div>
+                </div>
+                <div class="block">
+                  <div class="list no-chevron" id="list"></div>
+                </div>
+            </div>
+
+        <div id="tab-3" class="page-content tab">
+            <div class="page">
+              <!-- Another Floating Action Button -->
+              <div class="fab fab-right-bottom " style="margin-bottom: 18%;">
+                <a href="/konfirmasi/">
+                  <i class="icon f7-icons">add</i>
+                </a>
+              </div>
+              <!-- Scrollable Page Content-->
+              <div class="page-content">
+                <div class="block">
+                  <div class="list no-chevron" id="listkonfir"></div>
+                </div>
+              </div>
+            </div>
+        </div>          
+        <div id="tab-4" class="page-content tab">
+            <div class="chip color-green full">
+                <div class="chip-label">Akun</div>
+            </div>
+                  <p style="text-align: center">
+                      <img src="img/profile.png" style="width:40%; margin-left:auto; margin-right:auto; margin-bottom:3%; display:block">
+                  </p>                      
+                  <p class="row">
+                      <button type="button" class="col button button-fill color-red full" onclick="proseslogout()">Logout</button>
+                  </p>   
+            
+        </div>
+            <div class="page-content"  >
+                  <!-- BLOK LOGIN SCREEN -->
+                  <div class="login-screen" id="hal_login">
+                        <div class="page">
+                            <div class="page-content login-screen-content" style="border-style: none; color: #ffffff; background: linear-gradient(to top, #3F51B5  -10%, #1ad098 100%, #a09999 121%);">
+                                <div class="block">
+                                    <p style="text-align: center">
+                                        <img src="img/gza.png" style="width:40%; margin-left:auto; margin-right:auto; margin-bottom:3%; display:block">
+                                    </p>
+                                </div>
+                                <div class="login-screen-title">Login Santri</div>
+                                <form>
+                                    <div class="list">
+                                        <ul>
+                                            <li class="item-content item-input">
+                                                <div class="item-inner">
+                                                    <div class="item-title item-label">ID</div>
+                                                    <div class="item-input-wrap">
+                                                        <input type="text" id="txtid">
+                                                        <span class="input-clear-button"></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item-content item-input">
+                                                <div class="item-inner">
+                                                    <div class="item-title item-label">Password</div>
+                                                    <div class="item-input-wrap">
+                                                        <input type="password" id="txtpassword">
+                                                        <span class="input-clear-button"></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                    
+                                        </ul>
+                                    </div>
+                                    <div class="block">
+                                        <p class="row">
+                                            <button type="button" class="col button button-fill color-red" onclick="proseslogin()">Login</button>
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                  </div>
+
+                  <!-- BLOK POPOVER -->
+                  <div class="popover popover-login">
+                      <div class="popover-inner">
+                          <div class="list">
+                              <ul>
+                                  <li>
+                                      <a href="#" class="list-button itemlink-popover-close" 
+                                          onclick="app.popover.close();app.loginScreen.open('#loginpeserta');">Peserta
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="#" class="list-button itemlink-popover-close" 
+                                          onclick="app.popover.close();app.loginScreen.open('#loginpetugas');">Petugas
+                                      </a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="popover popover-help">
+                      <div class="popover-inner">
+                          <div class="list">
+                              <ul>
+                                  <!-- <li><a href="#" class="list-button itemlink-popover-close" onclick="">Versi Aplikasi</a></li> -->
+                                  <li><a href="/tentang/" class="list-button itemlink-popover-close" onclick="app.popover.close('.popover-help')">Tentang Aplikasi</a></li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="popover popover-editprofil">
+                      <div class="popover-inner">
+                          <form class="list">
+                              <div class="item-content item-input">
+                                  <div class="item-inner">
+                                      <div class="item-title item-label">Nama Baru</div>
+                                      <div class="item-input-wrap">
+                                          <input type="text" id="txtnama" placeholder="Nama Baru">
+                                          <span class="input-clear-button"></span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </form>
+                          <div class="block" style="margin-top: 3px;">
+                              <p class="row">
+                                  <button type="button" class="col button button-fill" onclick="updateprofil()">Update</button>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="popover popover-profil">
+                      <div class="popover-inner">
+                          <div class="list">
+                              <ul>
+                                  <li><a href="#" class="list-button itemlink- popover-close" onclick="kameraprofil()">Kamera</a></li>
+                                  <li><a href="#" class="list-button item-link popover-close" onclick="galeriprofil()">Galeri</a></li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="popover popover-gantipassword">
+                      <div class="popover-inner">
+                          <form class="list">
+                              <div class="item-content item-input">
+                                  <div class="item-inner">
+                                      <div class="item-title item-label">Password Baru</div>
+                                      <div class="item-input-wrap">
+                                          <input type="password" id="txtp1" placeholder="Isi Password Baru">
+                                          <span class="input-clear-button"></span>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="item-content item-input">
+                                  <div class="item-inner">
+                                      <div class="item-title item-label">Konfirmasi</div>
+                                      <div class="item-input-wrap">
+                                          <input type="password" id="txtp2" placeholder="Konfirmasi Password">
+                                          <span class="input-clear-button"></span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </form>
+                          <div class="block" style="margin-top: 3px;">
+                              <p class="row">
+                                  <button type="button" class="col button button-fill" onclick="updatepassword()">Update</button>
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+
+            </div>
+  	      </div>
+  	  </div>
+    </div>
+
+    <script src="packages/core/js/framework7.min.js"></script>
+  	<script src="js/routes.js"></script>
+  	<script src="js/app.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.md5.min.js"></script>
+    <script src="cordova.js"></script>
+
+
+  	<script>
+
+       if(localStorage.gz481 == '' || localStorage.gz481 == undefined){
+          app.loginScreen.open('#hal_login');
+        }else{
+          ceksaldosantri()
+        }
+
+
+        function ceksaldosantri(){
+            var jmlsaldo;
+            $.getJSON(get_saldosantri, {santri: localStorage.gz481}, function(result){
+                $.each(result, function(i, kolom){
+                    jmlsaldo = kolom.saldo;
+                    $("#bloknamasantri").html("Nama Santri : " + kolom.nm_santri);
+                });
+                //app.dialog.close();
+                $("#bloksaldosantri").html("Rp. " + jmlsaldo + ",-");
+              });
+        }
+
+        //proses login
+        function proseslogin(){
+            var u1 = $("#txtid").val();
+            var p1 = $("#txtpassword").val();
+            var u2;
+
+            if (u1 == ''|| p1 == ''){
+                app.dialog.alert('Akun Salah, Tidak Terdaftar,atau Tidak Aktif, Silahkan Ulang Kembali', 'Login Gagal');
+                  return;
+            }
+            app.dialog.preloader('Cek Login ...');
+            $.getJSON(api_loginsantri, {u1:u1, p1:p1}, function(result){
+                $.each(result, function(i, kolom){
+                    u2 = kolom.id;
+                });
+                app.dialog.close();
+
+                if(u1 == u2){
+                    localStorage.setItem('gz481', u1);
+                    window.location.reload();
+                }else{
+                    app.dialog.alert('Akun Salah, Tidak Terdaftar,atau Tidak Aktif, Silahkan Ulang Kembali', 'Login Gagal');
+                }
+            });
+        }
+
+        //fungsi saldo
+        function saldo(){
+          var tempel = $("#txtkartu").val();
+          var  n = tempel.length;
+          if(tempel.length == 10){
+              app.dialog.preloader('Cek saldo ...');
+              $.getJSON(get_saldo, {tempel: tempel}, function(result){
+                  $.each(result, function(i, kolom){
+                      jmlsaldo = kolom.saldo;
+                      localStorage.setItem('fadil', jmlsaldo);
+                      $("#bloksaldo").html("Rp. " + jmlsaldo + ",-");
+                  });
+                  app.dialog.close();
+              });
+          }else{
+              $("#bloksaldo").html("Rp. 0,-");
+          }
+        }
+
+        //fungsi cek saldo
+        function saldo1(){
+          var tempel = $("#txtkartu1").val();
+          var  n = tempel.length;
+          if(tempel.length == 10){
+              app.dialog.preloader('Cek saldo ...');
+              $.getJSON(get_saldo, {tempel: tempel}, function(result){
+                  $.each(result, function(i, kolom){
+                      jmlsaldo = kolom.saldo;
+                      localStorage.setItem('fadil', jmlsaldo);
+                      $("#bloksaldo1").html("Rp. " + jmlsaldo + ",-");
+                  });
+                  localStorage.removeItem("fadil");
+                  app.dialog.close();
+              });
+          }else{
+              $("#bloksaldo1").html("Rp. 0,-");
+          }
+        }
+
+        function reloadkonfirmasi(){
+            app.dialog.preloader('Load konfirmasi ...');
+            var isi = "<ul>"; var cc;
+            $.getJSON(get_konfirmasi, function(result){
+                $.each(result, function(i, kolom){
+                    if (kolom.status == 'Proses'){cc = 'chip color-blue';}
+                    else if (kolom.status == 'DiTolak'){cc = 'chip color-red';}
+                    else if (kolom.status == 'DiTerima'){cc = 'chip color-green';
+                    }else{
+                      cc = 'chip color-maroon';
+                    }
+                    isi = isi + '\
+                    <li>\
+                        <a href="#" class="item-link item-content">\
+                            <div class="item-media"><i class="icon f7-icons">money_dollar_round_fill</i></div>\
+                            <div class="item-inner">\
+                                <div class="item-title">\
+                                    <div class="item-header">no.rekening :'+kolom.no_rek+'</div>\
+                                    Nominal : Rp.'+kolom.nominal+'\
+                                    <div class="item-footer"> Atas Nama :'+kolom.atas_nm+'</div>\
+                                </div>\
+                                <div class="item-subtitle">\
+                                    <div class="'+ cc +'">\
+                                        <div class="chip-label">'+ kolom.status +'</div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </a>\
+                    </li>';
+                });
+                app.dialog.close();
+                $("#listkonfir").html(isi + "</ul>");  
+            });
+        }
+        reloadkonfirmasi();
+
+        
+        // fungsi reload barang
+        function reloadbarang(){
+            app.dialog.preloader('Load Barang ...');
+            var isi = "<ul>";
+            $.getJSON(get_barang, function(result){
+                $.each(result, function(i, kolom){
+                    isi = isi + '\
+                    <li>\
+                        <a href="#" class="item-link item-content">\
+                            <div class="item-media"><i class="icon material-icons">local_mall</i></div>\
+                            <div class="item-inner">\
+                                <div class="item-title">\
+                                    <div class="item-header">'+kolom.no_rek+'</div>\
+                                    '+kolom.nominal+'\
+                                    <div class="item-footer">'+kolom.atas_nm+'</div>\
+                                </div>\
+                                <div class="item-subtitle">Rp.'+kolom.status+'</div>\
+                            </div>\
+                        </a>\
+                    </li>';
+                });
+                app.dialog.close();
+                $("#listbarang").html(isi + "</ul>");  
+            });
+        }
+        reloadbarang();
+
+        //fungsi barang
+        // function barang(){
+        //     app.dialog.preloader('Load Barang ...');
+        //     app.popup.open(".barang-popup");
+        //     var isi = "<ul>";
+        //     $.getJSON(get_barang, function(result){
+        //         $.each(result, function(i, kolom){
+        //             isi = isi + '\
+        //             <li>\
+        //                 <a href="/editbarang/"'+kolom.id_barang+' class="item-link item-content">\
+        //                     <div class="item-media"><i class="icon material-icons">local_mall</i></div>\
+        //                     <div class="item-inner">\
+        //                         <div class="item-title">\
+        //                             <div class="item-header">'+kolom.nm_barang+'</div>\
+        //                             '+kolom.merk+'\
+        //                             <div class="item-footer">'+kolom.satuan+'</div>\
+        //                         </div>\
+        //                         <div class="item-subtitle">Rp.'+kolom.hrg_jual+'</div>\
+        //                     </div>\
+        //                 </a>\
+        //             </li>';
+        //         });
+        //         app.dialog.close();
+        //         $("#listbarang1").html(isi + "</ul>");  
+        //     });
+        // }        
+        
+      //fungsi angka tombol 1
+      function setangka(f){
+        var a = $("#txtnominal").val();
+        $("#txtnominal").val(a + f);
+      }
+      // fungsi angka tombol 2
+      function setangka2(g){
+        var a = $("#txtpin").val();
+        $("#txtpin").val(a + g);
+      }
+      //fungsi mengirim send 
+      function send(){
+        var a = $("#txtnominal").val();
+        var b = localStorage.fadil;
+         if(parseInt(b) >= parseInt(a)){
+            app.popup.open(".pin-popup");
+         }else
+           app.dialog.alert('saldo tidak mencukupi');
+        }
+        // fungsi pin
+        function cekpin(){
+          var idsantri= '';
+          var emoney = $("#txtkartu").val();
+          var pin = $("#txtpin").val();
+          app.dialog.preloader('Cek PIN ...');
+          $.getJSON(get_cekpin, {emoney: emoney, pin: pin}, function(result){
+              $.each(result, function(i, kolom){
+                  idsantri = kolom.id_santri;
+                  // console.log(idsantri);
+              });
+              app.dialog.close();
+              if(idsantri != ''){
+                  var harga = $("#txtnominal").val();
+                  $.ajax({
+                        url: get_keluar,
+                        method: "POST",
+                        data: {idsantri: idsantri, harga: harga},
+                        cache: "false", 
+                        success: function(x){
+                            app.dialog.close();
+                            if(x == 1){
+                                app.dialog.alert("Transkasi Berhasil di Lakukan","Sukses");
+                                localStorage.removeItem("fadil");
+                                window.location = '';
+                            }else{app.dialog.alert("Transaksi Gagal di Lakukan","Gagal");}
+                            
+                        }
+                    })
+              }else{
+                app.dialog.alert('Pin Anda Salah');
+              }
+          });      
+        }
+
+        //fungsi
+        function proseslogout(){
+            app.dialog.confirm("Anda Yakin Ingin Logout ?", "Logout",
+                function(){logoff();},function(){}
+            );   
+        }
+
+        function logoff(){
+            localStorage.removeItem('gz481');
+            localStorage.removeItem('fadil');
+            // localStorage.removeItem('LoqG801k');
+            // localStorage.removeItem('MktG801t');
+            // localStorage.removeItem('XxbS784g');
+            window.location = '';
+        }
+       function refresh(){
+           window.location = '';
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+CREATE TABLE publikasi (
+ID char(5) NOT NULL,
+Judul VARCHAR(100) NOT NULL,
+Link TEXT NOT NULL,
+PRIMARY KEY(ID)
+);
+
+CREATE TABLE acara (
+ID char(5) NOT NULL,
+Tgl1 DATE NOT NULL,
+Tgl2 DATE NOT NULL,
+Acara VARCHAR(200) NOT NULL,
+Tempat VARCHAR(200) NOT NULL,
+gambar VARCHAR(200) NOT NULL,
+PRIMARY KEY(ID)
+);
+
+
+CREATE TABLE tour (
+ID char(5) NOT NULL,
+Tgl1 DATETIME NOT NULL,
+Tgl2 DATETIME NOT NULL,
+Lokasi VARCHAR(200) NOT NULL,
+Keterangan VARCHAR(200) NOT NULL,
+PRIMARY KEY(ID)
+);
+
+CREATE VIEW v_tour AS 
+SELECT ID, DATE(Tgl1) AS Tgl1, DATE(Tgl2) AS Tgl2, TIME(Tgl1) AS Jam1, TIME(Tgl2) AS Jam2, MINUTE(TIMEDIFF(Tgl2, Tgl1)) AS Durasi, Lokasi, Keterangan FROM tour ORDER BY Tgl1, ID;
+
+CREATE VIEW v_peserta AS 
+SELECT PesertaID, Nama, Handphone, Email, NA, 'akun' AS status FROM peserta UNION ALL 
+SELECT PesertaID, Nama, Handphone, Email, NA, 'registrasi' AS status FROM pesertaregistrasi;
+
+CREATE VIEW v_hotel AS 
+SELECT a.*, (SELECT COUNT(*) FROM hotelkamar WHERE HotelID = a.HotelID) AS Tipe_Kamar, 
+IF((SELECT SUM(JumlahKamar) FROM hotelkamar WHERE HotelID = a.HotelID) IS NULL,'0',(SELECT SUM(JumlahKamar) FROM hotelkamar WHERE HotelID = a.HotelID)) AS Jumlah_Kamar FROM hotel AS a ORDER BY a.HotelID;
+
+SELECT a.*, b.Nama AS Instansi, c.Nama AS StatusPeserta, d.HotelKamarPesertaID, d.HotelKamarID, d.Nomor FROM peserta AS a JOIN instansi AS b ON a.InstansiID = b.InstansiID JOIN statuspeserta AS c ON a.StatusPesertaID = c.StatusPesertaID LEFT JOIN hotelkamarpeserta AS d ON a.PesertaID = d.PesertaID WHERE a.NA = 'N' AND d.HotelKamarID IS NULL;
+
+SELECT a.*, b.Nama AS level FROM pengguna AS a JOIN level AS b ON a.LevelID = b.LevelID;
+
+SELECT a.*, (SELECT COUNT(*) FROM hotelkamarpeserta WHERE HotelKamarID = a.HotelKamarID) AS Terpakai FROM hotelkamar AS a
+
+SELECT a.*, b.Nama AS Instansi, c.Nama AS Status FROM peserta AS a JOIN instansi AS b ON a.InstansiID = b.InstansiID JOIN statuspeserta AS c ON a.StatusPesertaID = c.StatusPesertaID;
+
+SELECT a.*, b.TipeKamar, c.Nama AS Hotel FROM hotelkamarpeserta AS a JOIN hotelkamar AS b ON a.HotelKamarID = b.HotelKamarID JOIN hotel AS c ON b.HotelID = c.HotelID;

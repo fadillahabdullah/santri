@@ -1,0 +1,61 @@
+<template>
+<div class="page">
+    <div class="navbar no-shadow">
+        <div class="navbar-inner sliding">
+            <div class="title">Publikasi</div>
+            <div class="right">
+                <a href="#" class="link back">
+                    <i class="icon f7-icons">close</i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <div class="block">
+            <p style="text-align: center">
+                <img src="img/booklet.png" style="width:40%; margin-left:auto; margin-right:auto; margin-bottom:3%; display:block">
+            </p>
+            <p style="text-align: justify;">
+               Publikasi Jurnalis yang disediakan untuk menambah wawasan pembaca 
+            </p>
+            <div class="list media-list chevron-center" id="blokpdf" style="margin-top: -10px"></div>
+        </div>
+    </div>
+</div>
+</template>
+
+<script>
+    return{
+        on: {
+            pageInit: function(){
+                var hasil = "<ul>";
+                app.dialog.preloader('Data Publikasi ...');
+                $.getJSON(api_publikasi, function(result){
+                    $.each(result, function(i, kolom){
+                        var idp = kolom.ID;
+                        var jdl = kolom.Judul;
+                        var lnk = kolom.Link;
+
+                        hasil = hasil + '\
+                            <li>\
+                                <a href="'+ lnk +'" class="item-link item-content external">\
+                                    <div class="item-inner">\
+                                        <div class="item-title-row">\
+                                            <div class="item-title" style="color: maroon">Publikasi Ke ' + idp + '</div>\
+                                            <div class="item-after"></div>\
+                                        </div>\
+                                        <div class="item-subtitle"></div>\
+                                        <div class="item-text">'+ jdl +'</div>\
+                                    </div>\
+                                </a>\
+                            </li>'
+                    });
+                    $("#blokpdf").html(hasil + "</ul>");
+                    app.dialog.close();
+                });
+            }
+        }
+       
+    }
+</script>
